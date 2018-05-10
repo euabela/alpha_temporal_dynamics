@@ -1,4 +1,4 @@
-function td_preprocessing(data2prepro, outdir)
+function td_preprocessing(eeg2prepro, outdir)
 % PURPOSE 
 % - This code preprocesses original EEG data available in EEGLAB/.mat
 %   format. It homogenises channel names, detrends, re-references (to the
@@ -18,8 +18,8 @@ function td_preprocessing(data2prepro, outdir)
 % USAGE
 % - Can be used with or without arguments
 %
-% >> iaf_preprocessesing
-% >> iaf_preprocessing('myeeg.mat','mydrive/mydir');
+% >> td_preprocessesing
+% >> td_preprocessing('myeeg.mat','mydrive/mydir');
 %
 %--------------------------------------------------------------------------
 % (c) Eugenio Abela, MD / Richardson Lab
@@ -34,7 +34,7 @@ function td_preprocessing(data2prepro, outdir)
 %% Select data and output directory, define standard channel labels
 %=========================================================================
 if nargin <1
-    data2prepro = spm_select(Inf,'.mat$');
+    eeg2prepro = spm_select(Inf,'.mat$');
     outdir      = spm_select(Inf,'dir','Select output directory...');
 end
 
@@ -43,12 +43,12 @@ stdLabels   = {'Fp2';'Fp1';'F8';'F4';'Fz';'F3';'F7';'T4';'C4';'Cz';'C3';...
 %% Preprocess
 %=========================================================================
 
-for filenum = 1:size(data2prepro,1)
+for filenum = 1:size(eeg2prepro,1)
     
     % Load data
     %----------------------------------------------------------------------
 
-    load(deblank(data2prepro(filenum,:)));
+    load(deblank(eeg2prepro(filenum,:)));
     
     % Initialise data structure
     %----------------------------------------------------------------------
@@ -104,7 +104,7 @@ for filenum = 1:size(data2prepro,1)
     % Rename and save as Fieldtrip data structure
     %----------------------------------------------------------------------
     
-    [~, namIn, ~] = spm_fileparts(data2prepro(filenum,:));
+    [~, namIn, ~] = spm_fileparts(eeg2prepro(filenum,:));
     
     if length(namIn) == 12
         namOut = [namIn(1:end-2) '0' namIn(end-1:end)];  
