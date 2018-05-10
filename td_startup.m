@@ -22,6 +22,7 @@ function H = td_startup
 %
 % Version history:
 %
+% 18/05/10 Minor edits: additional paths and more defaults
 % 18/05/09 Initial version
 
 %% Define file paths
@@ -38,13 +39,15 @@ Fanalysis   = [Fbase fs '03_analysis'];
 
 addpath(genpath(Fdata));
 addpath(genpath(Fcode));
+addpath(genpath(Fanalysis));
 
-%% Define analysis defaults
+%% Define software and analysis defaults
 %==========================================================================
 
+% SPM12 defaults
 spm('defaults', 'eeg');
 
-% Other...
+% Analysis defaults
 freq = 2:.1:20; % frequency range for power spectra
 fwhm = 4;       % full-width at half-maximum of Gaussian filter for GED
 
