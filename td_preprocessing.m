@@ -1,8 +1,9 @@
 function td_preprocessing(eeg2prepro, outdir)
 % PURPOSE 
-% - This code preprocesses original EEG data available in EEGLAB/.mat
-%   format. It homogenises channel names, detrends, re-references (to the
-%   median) and saves data in Fieldtrip structure.
+% - This code preprocesses original EEG data available in EEGLAB.mat
+%   format (we received them in this way). It homogenises channel names,
+%   detrends, re-references (to the median) and saves data in Fieldtrip
+%   structure.
 %
 % INPUT
 % - data2prepro: paths to continous EEG recordings
@@ -26,6 +27,7 @@ function td_preprocessing(eeg2prepro, outdir)
 %
 % Version history:
 %
+% 18/05/09 Renamed variables for consistency
 % 18/05/08 Minor edits for temporal dynamics project
 % 17/11/20 Added comments, improved data names for saving
 % 17/09/09 Initial version
