@@ -36,8 +36,13 @@ function td_preprocessing(eeg2prepro, outdir)
 %% Select data and output directory, define standard channel labels
 %=========================================================================
 if nargin <1
-    eeg2prepro = spm_select(Inf,'.mat$');
-    outdir     = spm_select(Inf,'dir','Select output directory...');
+    if exist('spm','builtin')
+        eeg2prepro = spm_select(Inf,'.mat$','Select data to preprocess...');
+        outdir     = spm_select(Inf,'dir','Select output directory...');
+    else
+        eeg2prepro = uigetfile({'*.mat'});
+        outdir     = uigetdir;
+    end  
 end
 
 stdLabels   = {'Fp2';'Fp1';'F8';'F4';'Fz';'F3';'F7';'T4';'C4';'Cz';'C3';...
@@ -50,17 +55,14 @@ for filenum = 1:size(eeg2prepro,1)
     
     % Load data
     %----------------------------------------------------------------------
-
     load(deblank(eeg2prepro(filenum,:)));
     
     % Initialise data structure
     %----------------------------------------------------------------------
-
     eeg = [];
     
     % Clean,reorder, and re-assign channel labels
     %----------------------------------------------------------------------
-
     oldLabels = struct2cell(EEG.chanlocs)';
     
     if strcmp(EEG.chanlocs(1).labels, 'Fp1 - Ref')==1
@@ -75,7 +77,6 @@ for filenum = 1:size(eeg2prepro,1)
     
     % Reorder and assign data matrix
     %----------------------------------------------------------------------
-
     eeg.fsample = EEG.srate;
      
     for i = 1:length(EEG.trials)
@@ -86,7 +87,6 @@ for filenum = 1:size(eeg2prepro,1)
     
     % Detrend and re-reference to median (less prone to outliers)
     %----------------------------------------------------------------------  
-    
     cfg            = [];
     cfg.detrend    = 'yes';
     cfg.reref      = 'yes';
@@ -99,15 +99,13 @@ for filenum = 1:size(eeg2prepro,1)
     % Often superfluous, because our data have low sampling rate anyway -
     % this is just to make absolutely sure every file has the same sampling
     % rate. Overwrite structure above.
-    
     cfg            = [];
     cfg.resamplefs = 256;
     eeg            = ft_resampledata(cfg,eeg);
 
     % Rename and save as Fieldtrip data structure
     %----------------------------------------------------------------------
-    
-    [~, namIn, ~] = spm_fileparts(eeg2prepro(filenum,:));
+    [~, namIn, ~] = fileparts(eeg2prepro(filenum,:));
     
     if length(namIn) == 12
         namOut = [namIn(1:end-2) '0' namIn(end-1:end)];  
