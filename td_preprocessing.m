@@ -37,11 +37,12 @@ function td_preprocessing(eeg2prepro, outdir)
 %=========================================================================
 if nargin <1
     eeg2prepro = spm_select(Inf,'.mat$');
-    outdir      = spm_select(Inf,'dir','Select output directory...');
+    outdir     = spm_select(Inf,'dir','Select output directory...');
 end
 
 stdLabels   = {'Fp2';'Fp1';'F8';'F4';'Fz';'F3';'F7';'T4';'C4';'Cz';'C3';...
     'T3';'T6';'P4';'Pz';'P3';'T5';'O2';'O1'};
+
 %% Preprocess
 %=========================================================================
 
@@ -57,7 +58,7 @@ for filenum = 1:size(eeg2prepro,1)
 
     eeg = [];
     
-    % Clean,reorder, and re-yassign channel labels
+    % Clean,reorder, and re-assign channel labels
     %----------------------------------------------------------------------
 
     oldLabels = struct2cell(EEG.chanlocs)';

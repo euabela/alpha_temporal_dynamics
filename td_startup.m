@@ -1,4 +1,4 @@
-function H = td_startup
+function TD = td_startup
 % PURPOSE 
 % - General purpose code to set pathnames and defaults before working on
 %   the data. Adapted from Richard Rosch (https://github.com/roschkoenig),
@@ -11,11 +11,11 @@ function H = td_startup
 % - Structure with defined file paths and defaults
 %
 % DEPENDENCIES
-% - SPM12
+% - None
 %
 % USAGE
 %
-% >> H = td_startup;
+% >> TD = td_startup;
 %
 %--------------------------------------------------------------------------
 % (c) Eugenio Abela, MD / Richardson Lab
@@ -30,32 +30,30 @@ function H = td_startup
 fs          = filesep;
 
 if strcmp(computer, 'MACI64') 
-    Fbase = '/Users/eugenio/Documents/science/projects/epilepsy/2018-05-08_alpha-temporal-dynamics'; 
+   root = uigetdir; 
 end
 
-Fdata       = [Fbase fs '01_data'];
-Fcode       = [Fbase fs '02_code'];
-Fanalysis   = [Fbase fs '03_analysis'];
+datapath      = [root fs '01_data'];
+codepath      = [root fs '02_code'];
+analysispath  = [root fs '03_analysis'];
 
-addpath(genpath(Fdata));
-addpath(genpath(Fcode));
-addpath(genpath(Fanalysis));
+addpath(genpath(datapath));
+addpath(genpath(codepath));
+addpath(genpath(analysispath));
 
-%% Define software and analysis defaults
+
+%% Define software tools
 %==========================================================================
 
-% SPM12 defaults
-spm('defaults', 'eeg');
-
-% Analysis defaults
-freq = 2:.1:20; % frequency range for power spectra
-fwhm = 4;       % full-width at half-maximum of Gaussian filter for GED
+%addpath('/Users/eugenio/Documents/MATLAB/tools/spm12');
+%spm('defaults', 'eeg');
+addpath(genpath('/Users/eugenio/Documents/MATLAB/tools/plotting'));
+addpath('/Users/eugenio/Documents/MATLAB/tools/fieldtrip-20180825');
 
 %% Pack for exporting
 %==========================================================================
-H.Fbase     = Fbase;
-H.Fscripts  = Fcode;
-H.Fdata     = Fdata;
-H.Fanalysis = Fanalysis;
-H.freq      = freq;
-H.fwhm      = fwhm;
+TD.root         = root;
+TD.code         = codepath;
+TD.data         = datapath;
+TD.analysis     = analysispath;
+TD.layout       = which('eeg1020_layout.mat');
