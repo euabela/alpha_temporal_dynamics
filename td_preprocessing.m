@@ -6,14 +6,14 @@ function td_preprocessing(eeg2prepro, outdir)
 %   structure.
 %
 % INPUT
-% - data2prepro: paths to continous EEG recordings
+% - eeg2prepro: paths to continous EEG recordings
 % - outdir: directory to move data to
 %
 % OUTPUT
 % - EEG in Fieldtrip format
 %
 % DEPENDENCIES
-% - SPM12
+% - SPM12 (optional)
 % - Fieldtrip
 %
 % USAGE
@@ -27,6 +27,7 @@ function td_preprocessing(eeg2prepro, outdir)
 %
 % Version history:
 %
+% 19/01/12 Small I/O and readability improvements
 % 18/05/09 Renamed variables for consistency
 % 18/05/08 Minor edits for temporal dynamics project
 % 17/11/20 Added comments, improved data names for saving
