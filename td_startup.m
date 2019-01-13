@@ -20,6 +20,7 @@ function TD = td_startup
 %
 % Version history:
 %
+% 19/01/12 Description update
 % 18/05/10 Minor edits: additional paths and more defaults
 % 18/05/09 Initial version
 
