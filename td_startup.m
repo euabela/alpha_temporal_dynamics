@@ -1,8 +1,6 @@
 function TD = td_startup
-% PURPOSE 
-% - General purpose code to set pathnames and defaults before working on
-%   the data. Adapted from Richard Rosch (https://github.com/roschkoenig),
-%   all credit to him.
+% Set pathnames and defaults before working on data. 
+% Adapted from an idea by Richard Rosch (https://github.com/roschkoenig)
 %
 % INPUT
 % - None
