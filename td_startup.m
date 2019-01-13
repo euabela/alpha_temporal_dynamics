@@ -30,7 +30,7 @@ function TD = td_startup
 fs          = filesep;
 
 if strcmp(computer, 'MACI64') 
-   root = uigetdir; 
+   root = uigetdir('','Select root folder');
 end
 
 datapath      = [root fs '01_data'];
@@ -44,7 +44,6 @@ addpath(genpath(analysispath));
 
 %% Define software tools
 %==========================================================================
-
 %addpath('/Users/eugenio/Documents/MATLAB/tools/spm12');
 %spm('defaults', 'eeg');
 addpath(genpath('/Users/eugenio/Documents/MATLAB/tools/plotting'));
@@ -56,4 +55,4 @@ TD.root         = root;
 TD.code         = codepath;
 TD.data         = datapath;
 TD.analysis     = analysispath;
-TD.layout       = which('eeg1020_layout.mat');
+TD.layout       = which('fieldtrip_1020_layout.mat');
