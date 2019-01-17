@@ -1,5 +1,6 @@
 % td_figure1
-% This script  
+% This script generates the first two panels of figure one in the paper. 
+% It needs gramm by Pierre Morel (https://github.com/piermorel/gramm). 
 %% Load data
 %==========================================================================
 load PSD.mat
