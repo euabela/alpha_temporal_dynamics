@@ -80,7 +80,7 @@ nbts      = nbts * sign(corr(nbts,eeg.trial{1,1}(maxe,:)'));
 
 % Spatially filter the EEG
 %--------------------------------------------------------------------------
-nbeeg       = bsxfun(@times,eeg.trial{1,1},evecs(:,maxcomp(end)));
+% nbeeg       = bsxfun(@times,eeg.trial{1,1},evecs(:,maxcomp(end)));
 
 %% Save
 comp = struct;
