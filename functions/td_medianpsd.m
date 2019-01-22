@@ -74,7 +74,7 @@ nFoi  = length(cfg.foi);
 psd   = zeros(nChan, nFoi);
 
 % Calculate equivalent noise bandwidth of a single Hanning taper with
-% length "winlen".
+% length "windowLength" and sampling rate eeg.fsample.
 bw  = enbw(hann(windowLength), eeg.fsample);
 
 % Loop over channels
