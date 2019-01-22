@@ -2,7 +2,12 @@ function model = td_modelpsd(params,freq)
 % Models psd based on fitted parameters
 %
 % INPUTS
-% - params: parameter structure for model
+% - params: structure with model parameters, should contain fields
+%       .back.intercept - scalar, intercept of background fit
+%       .back.slope     - scalar, slope of background fit
+%       .osc.amplitude  - scalar, amplitude of Gaussian oscillatory fit
+%       .osc.centerfreq - scalar, centre (aka peak) frequency of Gaussian oscillatory fit
+%       .osc.fwhm       - scalar, full width at half max of Gaussian oscillatory fit
 % - freq: frequency vector
 %
 % OUTPUTS
@@ -19,11 +24,16 @@ function model = td_modelpsd(params,freq)
 %
 %--------------------------------------------------------------------------
 % (c) Eugenio Abela, MD / Richardson Lab
+%
 
+%% Check inputs
+%==========================================================================
 if nargin <2
     freq = 2:0.1:24;
 end
 
+%% Generate PSD model
+%==========================================================================
 % Model aperiodic background
 i    = params.back.intercept;
 s    = params.back.slope;
@@ -35,7 +45,8 @@ cf  = params.osc.centerfreq;
 sd  = params.osc.fwhm;
 osc = pk*exp(-((freq-cf)/sd).^2);
 
-
+%% Save
+%==========================================================================
 % Pack up
 model.back = back;
 model.osc  = osc;
