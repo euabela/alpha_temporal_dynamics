@@ -5,10 +5,13 @@ function params = td_fitpsd(psd)
 %--------------------------------------------------------------------------
 
 %% Check inputs
+%==========================================================================
 if nargin <1
     error('Need data!')
 end
+
 %% Collect and check data
+%==========================================================================
 freq   = psd.freq;
 avgpsd = median(psd.powspctrm,1);
 
@@ -34,7 +37,7 @@ flatpsd        = avgpsd-firstpassfit;
 %--------------------------------------------------------------------------
 % Set oscillatory thresholds
 ampthresh = 2*std(flatpsd);     % at least 2 SD above noise floor
-%widthresh = 3*mean(diff(freq)); % at least 3 x frequency resolution
+%widthresh = 3*mean(diff(freq)); % at least 3 x frequency resolution UNUSED
 
 % Find location and index of largest oscillatory peak
 [pks,loc,width,height] = findpeaks(flatpsd,freq,...
@@ -49,10 +52,10 @@ if ~isempty(loc)
     width     = width(maxid);
     height    = height(maxid);
     index     = dsearchn(freq',loc); 
-    
 else
     % If no oscillation found, default to standard alpha-band to fit
-    % background
+    % background - this is not a great idea in practice; we decided to exclude
+    % parcitipants without oscillations.
      index     = dsearchn(freq',10);
 end
         
