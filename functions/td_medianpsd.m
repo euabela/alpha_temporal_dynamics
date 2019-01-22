@@ -1,6 +1,7 @@
 function p = td_medianpsd(eeg, windowLength, windowOverlap,frequencyLimits)
 % Calculates log10 power spectral density using the median values of
 % a Hanning-tapered short-time Fast Fourier Transform ("median Welch").
+% PSD is obtained bydividing power by the ENBW of the Hann window.
 %
 % INPUTS
 % - eeg: FieldTrip raw data structure
@@ -73,7 +74,7 @@ nFoi  = length(cfg.foi);
 psd   = zeros(nChan, nFoi);
 
 % Calculate equivalent noise bandwidth of a single Hanning taper with
-% length "winlen". From the literature: should be around 1.50.
+% length "winlen".
 bw  = enbw(hann(windowLength), eeg.fsample);
 
 % Loop over channels
